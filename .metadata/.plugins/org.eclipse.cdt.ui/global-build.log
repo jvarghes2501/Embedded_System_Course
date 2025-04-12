@@ -1,21 +1,21 @@
-15:43:59 **** Incremental Build of configuration Debug for project peripheralClockEnable_test ****
+10:40:04 **** Incremental Build of configuration Debug for project peripheralClockEnable_test ****
 make -j16 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "peripheralClockEnable_test.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\jesti\OneDrive\Desktop\Embedded_System_Course\peripheralClockEnable_test\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="peripheralClockEnable_test.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: peripheralClockEnable_test.elf
+ 
 arm-none-eabi-size  peripheralClockEnable_test.elf 
+arm-none-eabi-objdump -h -S peripheralClockEnable_test.elf  > "peripheralClockEnable_test.list"
    text	   data	    bss	    dec	    hex	filename
-    676	      0	   1568	   2244	    8c4	peripheralClockEnable_test.elf
+    696	      0	   1568	   2264	    8d8	peripheralClockEnable_test.elf
 Finished building: default.size.stdout
  
-15:46:18 **** Incremental Build of configuration Debug for project peripheralClockEnable_test ****
-make -j16 all 
-arm-none-eabi-size  peripheralClockEnable_test.elf 
-   text	   data	    bss	    dec	    hex	filename
-    676	      0	   1568	   2244	    8c4	peripheralClockEnable_test.elf
-Finished building: default.size.stdout
+Finished building: peripheralClockEnable_test.list
  
-16:11:20 **** Incremental Build of configuration Debug for project peripheralClockEnable_test ****
+10:40:09 **** Incremental Build of configuration Debug for project peripheralClockEnable_test ****
 make -j16 all 
 arm-none-eabi-size  peripheralClockEnable_test.elf 
    text	   data	    bss	    dec	    hex	filename
-    676	      0	   1568	   2244	    8c4	peripheralClockEnable_test.elf
+    696	      0	   1568	   2264	    8d8	peripheralClockEnable_test.elf
 Finished building: default.size.stdout
  

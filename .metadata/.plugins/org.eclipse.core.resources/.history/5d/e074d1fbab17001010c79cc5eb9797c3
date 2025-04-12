@@ -27,9 +27,7 @@ int main(void)
 	uint32_t *pADC_CR1_reg = (uint32_t*) ADC_CR1_REG_ADDR;
 	uint32_t *pRCC_APB2_ENR_reg = (uint32_t*) RCC_APB2_ENR_ADDR;
 
-	// enable the clock for peripheral clock ADC1
 	*pRCC_APB2_ENR_reg |= (1<<8);
-	//we can only manipulate the register value when the clock for that peripheral is enabled
 	*pADC_CR1_reg |= (1<<8);  // set the 8th bit
 
     /* Loop forever */
