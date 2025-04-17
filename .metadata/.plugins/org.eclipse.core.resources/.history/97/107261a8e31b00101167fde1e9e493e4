@@ -1,0 +1,15 @@
+/*
+ * stm32f407xx_gpio_driver.c
+ *
+ *  Created on: Apr 17, 2025
+ *      Author: jesti
+ */
+# include "stm32f407xx_gpio_driver.h"
+
+void GPIO_ClockControl(GPIO_RegDef_t *pGPIOx, uint8_t Enable_or_disable){
+	if (Enable_or_disable){
+		if (*pGPIOx == GPIOA){
+
+		}
+	}
+}
