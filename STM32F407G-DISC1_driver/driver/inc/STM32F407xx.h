@@ -41,7 +41,7 @@
 # define GPIOG_BASEADDR		(AHB1PERIPH_BASEADDR + 0x1800)
 # define GPIOH_BASEADDR		(AHB1PERIPH_BASEADDR + 0x1C00)
 # define GPIOI_BASEADDR		(AHB1PERIPH_BASEADDR + 0x2000)
-# define RCC_BASEADDR				(AHB1PERIPH_BASEADDR + 0x3800)
+# define RCC_BASEADDR		(AHB1PERIPH_BASEADDR + 0x3800)
 /*
  * Peripherals base addresses attached to the APB1 bus
  */
@@ -152,6 +152,19 @@ typedef struct {
 #define GPIOG_CLOCK_ENABLE()	(RCC->AHB1ENR |= (1<<6))
 #define GPIOH_CLOCK_ENABLE()	(RCC->AHB1ENR |= (1<<7))
 #define GPIOI_CLOCK_ENABLE()	(RCC->AHB1ENR |= (1<<8))
+
+/*
+ * reset gpiox registers
+ */
+#define GPIOA_REG_RESET()		do{(RCC->AHB1RSTR|=(1<<0)); (RCC->AHB1RSTR &= ~(1<<0)); }while(0) // do while 0 used to fit multiple statements ino a macro
+#define GPIOB_REG_RESET()		do{(RCC->AHB1RSTR|=(1<<1)); (RCC->AHB1RSTR &= ~(1<<1)); }while(0)
+#define GPIOC_REG_RESET()		do{(RCC->AHB1RSTR|=(1<<2)); (RCC->AHB1RSTR &= ~(1<<2)); }while(0)
+#define GPIOD_REG_RESET()		do{(RCC->AHB1RSTR|=(1<<3)); (RCC->AHB1RSTR &= ~(1<<3)); }while(0)
+#define GPIOE_REG_RESET()		do{(RCC->AHB1RSTR|=(1<<4)); (RCC->AHB1RSTR &= ~(1<<4)); }while(0)
+#define GPIOF_REG_RESET()		do{(RCC->AHB1RSTR|=(1<<5)); (RCC->AHB1RSTR &= ~(1<<5)); }while(0)
+#define GPIOG_REG_RESET()		do{(RCC->AHB1RSTR|=(1<<6)); (RCC->AHB1RSTR &= ~(1<<6)); }while(0)
+#define GPIOH_REG_RESET()		do{(RCC->AHB1RSTR|=(1<<7)); (RCC->AHB1RSTR &= ~(1<<7)); }while(0)
+#define GPIOI_REG_RESET()		do{(RCC->AHB1RSTR|=(1<<8)); (RCC->AHB1RSTR &= ~(1<<8)); }while(0)
 
 /*
  * Enable the clock for I2Cx peripherals

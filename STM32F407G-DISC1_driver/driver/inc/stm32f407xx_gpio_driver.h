@@ -30,6 +30,65 @@ typedef struct{
 	GPIO_PinConfig_t GPIO_PinConfig;
 }GPIO_Handle_t;
 
+#define GPIO_PIN_SET 	1
+#define GPIO_PIN_RESET 	0
+
+/*
+ * GPIO pin input modes
+ */
+# define GPIO_MODE_IN 		0
+# define GPIO_MODE_OUT 		1
+# define GPIO_MODE_ALTFN 	2
+# define GPIO_MODE_ANALOG 	3
+
+# define GPIO_MODE_INTPT_FALLING_TRIG			4
+# define GPIO_MODE_INTPT_RISING_TRIG			5
+# define GPIO_MODE_INTPT_RISING_FALLING_TRIG	6
+
+/*
+ * GPIO pin output modes
+ */
+#define GPIO_OUT_TYPE_PP 			0
+#define GPIO_OUT_TYPE_OD			1
+
+/*
+ * GPIO pin output speeds
+ */
+#define GPIO_SPEED_LOW		0
+#define GPIO_SPEED_MEDIUM	1
+#define GPIO_SPEED_FAST		2
+#define GPIO_SPEED_HIGH		3
+
+/*
+ * GPIO pin pull up and pull down configurations
+ */
+# define GPIO_NO_PUPD		0
+# define GPIO_PIN_PU		1
+# define GPIO_PIN_PD		2
+
+
+/*
+ * GPIO pin numbers
+ */
+#define GPIO_PIN_NO_0 		0
+#define GPIO_PIN_NO_1		1
+#define GPIO_PIN_NO_2		2
+#define GPIO_PIN_NO_3		3
+#define GPIO_PIN_NO_4		4
+#define GPIO_PIN_NO_5		5
+#define GPIO_PIN_NO_6		6
+#define GPIO_PIN_NO_7		7
+#define GPIO_PIN_NO_8		8
+#define GPIO_PIN_NO_9		9
+#define GPIO_PIN_NO_10		10
+#define GPIO_PIN_NO_11		11
+#define GPIO_PIN_NO_12		12
+#define GPIO_PIN_NO_13		13
+#define GPIO_PIN_NO_14		14
+#define GPIO_PIN_NO_15		15
+
+
+
 /*
  * Define API function prototypes for GPIO
  */
@@ -40,7 +99,7 @@ void GPIO_DiInit(GPIO_RegDef_t *pGPIOx);
 void GPIO_ClockControl(GPIO_RegDef_t *pGPIOx, uint8_t Enable_or_disable);
 
 uint8_t GPIO_ReadInputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber);
-uint16_t GPIO_ReadFromInpurPort(GPIO_RegDef_t *pGPIOx);
+uint16_t GPIO_ReadFromInputPort(GPIO_RegDef_t *pGPIOx);
 void GPIO_WriteToOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber,uint8_t value );
 void GPIO_WritToOutputPort(GPIO_RegDef_t *pGPIOx,uint8_t value);
 void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx,uint8_t PinNumber);
