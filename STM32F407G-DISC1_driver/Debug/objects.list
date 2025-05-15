@@ -1,5 +1,6 @@
-"./Src/2_LED_button.o"
+"./Src/3_SPI_TX_testing.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"
 "./Startup/startup_stm32f407vgtx.o"
 "./driver/src/stm32f407xx_gpio_driver.o"
+"./driver/src/stm32f407xx_spi_driver.o"

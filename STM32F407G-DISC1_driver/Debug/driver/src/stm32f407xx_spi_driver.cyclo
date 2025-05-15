@@ -1,0 +1,5 @@
+../driver/src/stm32f407xx_spi_driver.c:10:6:SPI_ClockControl	8
+../driver/src/stm32f407xx_spi_driver.c:31:6:SPI_Init	4
+../driver/src/stm32f407xx_spi_driver.c:69:6:SPI_PeripheralControl	2
+../driver/src/stm32f407xx_spi_driver.c:77:6:SPI_SSIConfig	2
+../driver/src/stm32f407xx_spi_driver.c:85:6:SPI_SendData	4

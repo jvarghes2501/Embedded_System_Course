@@ -5,17 +5,17 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Src/2_LED_button.c \
+../Src/3_SPI_TX_testing.c \
 ../Src/syscalls.c \
 ../Src/sysmem.c 
 
 OBJS += \
-./Src/2_LED_button.o \
+./Src/3_SPI_TX_testing.o \
 ./Src/syscalls.o \
 ./Src/sysmem.o 
 
 C_DEPS += \
-./Src/2_LED_button.d \
+./Src/3_SPI_TX_testing.d \
 ./Src/syscalls.d \
 ./Src/sysmem.d 
 
@@ -27,7 +27,7 @@ Src/%.o Src/%.su Src/%.cyclo: ../Src/%.c Src/subdir.mk
 clean: clean-Src
 
 clean-Src:
-	-$(RM) ./Src/2_LED_button.cyclo ./Src/2_LED_button.d ./Src/2_LED_button.o ./Src/2_LED_button.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su
+	-$(RM) ./Src/3_SPI_TX_testing.cyclo ./Src/3_SPI_TX_testing.d ./Src/3_SPI_TX_testing.o ./Src/3_SPI_TX_testing.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su
 
 .PHONY: clean-Src
 

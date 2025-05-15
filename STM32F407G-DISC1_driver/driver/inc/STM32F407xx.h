@@ -10,6 +10,22 @@
 #include <stdint.h>
 
 /*
+ * ARM cortex Mx processor NVIC register addresses
+ */
+# define NVIC_ISER0	((volatile uint32_t*) 0xE000E100)
+# define NVIC_ISER1	((volatile uint32_t*) 0xE000E104)
+# define NVIC_ISER2	((volatile uint32_t*) 0xE000E108)
+# define NVIC_ISER3	((volatile uint32_t*) 0xE000E10c)
+
+
+# define NVIC_ICER0	((volatile uint32_t*) 0xE000E180)
+# define NVIC_ICER1	((volatile uint32_t*) 0xE000E184)
+# define NVIC_ICER2	((volatile uint32_t*) 0xE000E188)
+# define NVIC_ICER3	((volatile uint32_t*) 0xE000E18c)
+
+# define NVIC_PR_BASE_ADDR 		((volatile uint32_t*) 0xE000E400)
+# define PR_BITS_IMPLEMENTED 	4
+/*
  * Flash and SRAM memory base addresses
  */
 # define FLASH_BASEADDR		0x08000000U
@@ -85,6 +101,14 @@ typedef struct {
 	volatile uint32_t AFRH;
 }GPIO_RegDef_t;
 
+typedef struct {
+	volatile uint32_t IMR;
+	volatile uint32_t EMR;
+	volatile uint32_t RTSR;
+	volatile uint32_t FTSR;
+	volatile uint32_t SWIER;
+	volatile uint32_t PR;
+}EXTI_RegDef_t;
 
 typedef struct {
 	volatile uint32_t CR;
@@ -123,6 +147,31 @@ typedef struct {
 	volatile uint32_t DCKCFGR2;
 }RCC_RegDef_t;
 
+typedef struct
+{
+	volatile uint32_t MEMRMP;
+	volatile uint32_t PMC;
+	volatile uint32_t EXTICR[4];
+	volatile uint32_t RESERVED1[2];
+	volatile uint32_t CMPCR;
+	volatile uint32_t RESERVED2[2];
+	volatile uint32_t CFGR;
+
+}SYSCFG_RegDef_t;
+
+typedef struct
+{
+	volatile uint32_t CR1;
+	volatile uint32_t  CR2;
+	volatile uint32_t SR;
+	volatile uint32_t DR;
+	volatile uint32_t CRCPR;
+	volatile uint32_t RXCRCR;
+	volatile uint32_t TXCRCR;
+	volatile uint32_t I2SCFGR;
+	volatile uint32_t I2SPR;
+}SPI_RegDef_t;
+
 /*
  * Peripheral definitions
  */
@@ -138,7 +187,12 @@ typedef struct {
 # define GPIOI		((GPIO_RegDef_t*)GPIOI_BASEADDR)
 
 # define RCC 				((RCC_RegDef_t*)RCC_BASEADDR)
+# define EXTI				((EXTI_RegDef_t*)EXTI_BASEADDR)
+# define SYSCFG				((SYSCFG_RegDef_t*)SYSCFG_BASEADDR)
 
+# define SPI1					((SPI_RegDef_t*)SPI1_BASEADDR)
+# define SPI2					((SPI_RegDef_t*)SPI2_BASEADDR)
+# define SPI3					((SPI_RegDef_t*)SPI3_BASEADDR)
 
 /*
  * Enable the clock for GPIOx peripherals
@@ -156,7 +210,7 @@ typedef struct {
 /*
  * reset gpiox registers
  */
-#define GPIOA_REG_RESET()		do{(RCC->AHB1RSTR|=(1<<0)); (RCC->AHB1RSTR &= ~(1<<0)); }while(0) // do while 0 used to fit multiple statements ino a macro
+#define GPIOA_REG_RESET()		do{(RCC->AHB1RSTR|=(1<<0)); (RCC->AHB1RSTR &= ~(1<<0)); }while(0) // do while 0 used to fit multiple statements into a macro
 #define GPIOB_REG_RESET()		do{(RCC->AHB1RSTR|=(1<<1)); (RCC->AHB1RSTR &= ~(1<<1)); }while(0)
 #define GPIOC_REG_RESET()		do{(RCC->AHB1RSTR|=(1<<2)); (RCC->AHB1RSTR &= ~(1<<2)); }while(0)
 #define GPIOD_REG_RESET()		do{(RCC->AHB1RSTR|=(1<<3)); (RCC->AHB1RSTR &= ~(1<<3)); }while(0)
@@ -247,10 +301,69 @@ typedef struct {
  */
 # define SYSCFG_CLOCK_DISABLE()	(RCC->APB2ENR&=~(1<<14))
 
+
+/*
+ * IRQ numbers of STM32F407 family
+ */
+#define IRQ_NO_EXTI0 		6
+#define IRQ_NO_EXTI1 		7
+#define IRQ_NO_EXTI2 		8
+#define IRQ_NO_EXTI3 		9
+#define IRQ_NO_EXTI4 		10
+#define IRQ_NO_EXTI5_9 		23
+#define IRQ_NO_EXTI10_15 	40
+
+
+/*
+ * Bit position definition for SPI_CR1 reg
+ */
+#define SPI_CR1_CPHA		0
+#define SPI_CR1_CPOL		1
+#define SPI_CR1_MSTR		2
+#define SPI_CR1_BR			3
+#define SPI_CR1_SPE			6
+#define SPI_CR1_LSBFIRST	7
+#define SPI_CR1_SSI			8
+#define SPI_CR1_SSM			9
+#define SPI_CR1_RXONLY		10
+#define SPI_CR1_DFF			11
+#define SPI_CR1_CRCNEXT		12
+#define SPI_CR1_CRCEN		13
+#define SPI_CR1_BIDIOE		14
+#define SPI_CR1_BIDIMODE	15
+
+/*
+ * Bit position definition for SPI_CR2 reg
+ */
+#define SPI_CR2_RXDMAEN		0
+#define SPI_CR2_TXDMAEN		1
+#define SPI_CR2_SSOE		2
+#define SPI_CR2_FRF		    4
+#define SPI_CR2_ERRIE		5
+#define SPI_CR2_RXNEIE		6
+#define SPI_CR2_TXEIE		7
+
+/*
+ * Bit position definition for SPI_SR reg
+ */
+# define SPI_SR_RXNE		0
+# define SPI_SR_TXE			1
+# define SPI_SR_CHSIDE		2
+# define SPI_SR_UDR			3
+# define SPI_SR_CRCERR		4
+# define SPI_SR_MODF		5
+# define SPI_SR_OVR			6
+# define SPI_SR_BSY			7
+# define SPI_SR_FRE			8
+
+
 //Generic macros
 #define ENABLE 		1
 #define DISABLE 	0
 #define SET 		1
 #define RESET		0
 
+
+//#include "stm32f407xx_gpio_driver.h"
+//#include "stm32f407xx_SPI_driver.h"
 #endif /* INC_STM32F407XX_H_ */
